@@ -4,15 +4,12 @@ import json
 import boto3
 from datetime import datetime
 
-from databricks.sdk import WorkspaceClient
-
-
 rivian = rivian.Rivian()
-w = WorkspaceClient()
+
 
 response = rivian.login(
-    w.dbutils.secrets.get(scope="deezwatts", key="username"),
-    w.dbutils.secrets.get(scope="deezwatts", key="password")
+    dbutils.secrets.get(scope="deezwatts", key="username"),
+    dbutils.secrets.get(scope="deezwatts", key="password")
 
 )
 
