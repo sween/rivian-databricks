@@ -3,6 +3,7 @@ import os
 import json
 import boto3
 from datetime import datetime
+from botocore.credentials import InstanceMetadataProvider, InstanceMetadataFetcher
 
 rivian = rivian.Rivian()
 
@@ -35,8 +36,13 @@ deezwatts = json.dumps(whipstatus)
 
 timeitis = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
 
+
+
+provider = InstanceMetadataProvider(iam_role_fetcher=InstanceMetadataFetcher(timeout=1000, num_attempts=2))
+creds = provider.load().get_frozen_credentials()
+
 # upload to a bucket
-session = boto3.session.Session()
+session = boto3.session.Session(region_name='us-east-2', aws_access_key_id=creds.access_key, aws_secret_access_key=creds.secret_key, aws_session_token=creds.token)
 s3 = session.resource('s3')
 s3object = s3.Object('deezwatts', 'in/json/deezwatts-json-' + timeitis + '.json')
 
