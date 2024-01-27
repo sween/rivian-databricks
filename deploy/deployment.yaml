@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rivian-databricks-deployment
+  labels:
+    app: rivian-databricks
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rivian-databricks
+  template:
+    metadata:
+      labels:
+        app: rivian-databricks
+    spec:
+      containers:
+      - name: rivian-databricks
+        image: sween/rivian-databricks:latest
+        ports:
+        - containerPort: 5000
+        env:
+        - name: RIVIAN_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: rivian-user-pass
+              key: rivian_password
+        - name: RIVIAN_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: rivian-user-pass
+              key: rivian_username
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: aws-access-key-id
+              key: aws_access_key_id
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: aws-secret-access-key
+              key: aws_secret_access_key
+        - name: AWS_DEFAULT_REGION
+          valueFrom:
+            secretKeyRef:
+              name: aws-default-region
+              key: aws_default_region

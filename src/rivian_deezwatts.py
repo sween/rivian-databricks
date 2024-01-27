@@ -37,7 +37,6 @@ timeitis = datetime.now().strftime("%Y_%m_%d-%I_%M_%S_%p")
 
 
 # upload to a bucket
-#session = boto3.session.Session()
 s3 = boto3.resource('s3')
 s3object = s3.Object('deezwatts', 'in/json/deezwatts-json-' + timeitis + '.json')
 
