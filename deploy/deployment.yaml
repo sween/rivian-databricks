@@ -17,8 +17,6 @@ spec:
       containers:
       - name: rivian-databricks
         image: sween/rivian-databricks:latest
-        ports:
-        - containerPort: 5000
         env:
         - name: RIVIAN_PASSWORD
           valueFrom:
@@ -33,15 +31,15 @@ spec:
         - name: AWS_ACCESS_KEY_ID
           valueFrom:
             secretKeyRef:
-              name: aws-access-key-id
+              name: aws-creds
               key: aws_access_key_id
         - name: AWS_SECRET_ACCESS_KEY
           valueFrom:
             secretKeyRef:
-              name: aws-secret-access-key
+              name: aws-creds
               key: aws_secret_access_key
         - name: AWS_DEFAULT_REGION
           valueFrom:
             secretKeyRef:
-              name: aws-default-region
+              name: aws-creds
               key: aws_default_region
