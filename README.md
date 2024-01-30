@@ -17,10 +17,10 @@ kubectl create secret generic aws-creds -n rivian \
     --from-literal=aws_default_region='us-east-2'
 ```
 
-Apply the Deployment
+Apply the Job
 
 ```
-kubectl apply -f deploy/deployment.yaml -n rivian
+kubectl apply -f deploy/cronjob.yaml -n rivian
 ```
 
 More Documentation and Errata over @ [Deez Watts - A Rivian Data Adventure](https://www.deezwatts.com)

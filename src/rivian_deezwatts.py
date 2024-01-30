@@ -59,7 +59,4 @@ class RivianDataBricks(object):
 
 
 if __name__ == '__main__':
-    while True:
-        RivianDataBricks().run()
-        # lets not piss off the Site Reliability Teams at Rivian
-        time.sleep(120)
+    RivianDataBricks().run()
